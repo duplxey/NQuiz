@@ -23,7 +23,16 @@ public class CommandManager {
     }
 
     public static Command getCommand(String command) {
-        return commands.get(command);
+        if (commands.containsKey(command)) {
+            return commands.get(command);
+        } else {
+            for (Command cmd : commands.values()) {
+                for (String alias : cmd.getAliases()) {
+                    if (alias.equalsIgnoreCase(command)) return cmd;
+                }
+            }
+        }
+        return null;
     }
 
     public static Collection<Command> getCommands() {

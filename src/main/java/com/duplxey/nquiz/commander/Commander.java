@@ -3,7 +3,7 @@ package com.duplxey.nquiz.commander;
 import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.commander.command.CommandManager;
 import com.duplxey.nquiz.commander.command.CommandRegister;
-import com.duplxey.nquiz.constants.O;
+import com.duplxey.nquiz.constants.Message;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -35,7 +35,7 @@ public class Commander {
                 }
                 Command command = CommandManager.getCommand(cmd);
                 if (command == null) {
-                    System.out.println(O.UNKNOWN_COMMAND.getText());
+                    System.out.println(Message.UNKNOWN_COMMAND.getText());
                 } else {
                     command.execute(arguments);
                 }

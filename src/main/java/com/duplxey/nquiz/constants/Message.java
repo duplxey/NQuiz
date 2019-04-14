@@ -3,7 +3,7 @@ package com.duplxey.nquiz.constants;
 /**
  * All the commonly used messages.
  */
-public enum O {
+public enum Message {
     UNKNOWN_COMMAND("Unknown command! Use 'help' for help."),
     NO_COMMAND("Cannot find the specified command."),
     WRONG_SYNTAX("Wrong syntax! "),
@@ -11,7 +11,7 @@ public enum O {
 
     private String text;
 
-    O(String text) {
+    Message(String text) {
         this.text = text;
     }
 

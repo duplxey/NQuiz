@@ -6,7 +6,7 @@ import com.duplxey.nquiz.commander.command.CommandManager;
 public class CommandsCommand extends Command {
 
     public CommandsCommand() {
-        super("commands", "Displays the command list.");
+        super("commands", "Displays the command list.", new String[] {"help"});
     }
 
     @Override

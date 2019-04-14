@@ -2,7 +2,7 @@ package com.duplxey.nquiz.commander.command.commands;
 
 import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.commander.command.CommandManager;
-import com.duplxey.nquiz.constants.O;
+import com.duplxey.nquiz.constants.Message;
 
 public class InfoCommand extends Command {
 
@@ -13,7 +13,7 @@ public class InfoCommand extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length != 1) {
-            System.out.println(O.WRONG_SYNTAX.getText() + getSyntax());
+            System.out.println(Message.WRONG_SYNTAX.getText() + getSyntax());
             return;
         }
         String name = args[0];
@@ -23,7 +23,7 @@ public class InfoCommand extends Command {
         }
         Command command = CommandManager.getCommand(name);
         if (command == null) {
-            System.out.println(O.NO_COMMAND.getText());
+            System.out.println(Message.NO_COMMAND.getText());
             return;
         }
         command.info();

@@ -3,7 +3,7 @@ package com.duplxey.nquiz.constants;
 /**
  * All the prefixes for messages/logging.
  */
-public enum S {
+public enum Prefix {
     INFO("INFO > ", 1),
     DEBUG("DEBUG > ", 2),
     WARNING("WARNING > ", 3),
@@ -13,7 +13,7 @@ public enum S {
     private String prefix;
     private int level;
 
-    S(String prefix, int level) {
+    Prefix(String prefix, int level) {
         this.prefix = prefix;
         this.level = level;
     }
