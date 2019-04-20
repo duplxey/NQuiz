@@ -6,5 +6,5 @@ Simple command-line based quiz.
 - Gson 2.8.5
 - Jsoup 1.8.3
 
-##A few quiz examples:
+## A few quiz examples:
 - https://pastebin.com/raw/dhLGhypw
