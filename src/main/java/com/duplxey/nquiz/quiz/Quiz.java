@@ -38,6 +38,10 @@ public class Quiz {
         return questions;
     }
 
+    public String info() {
+        return name + "(" + description + ") " + "(" + category + ") " + "(" + difficulty + ")";
+    }
+
     public void print() {
         System.out.println("============");
         System.out.println(name);

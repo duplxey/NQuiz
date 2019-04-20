@@ -13,6 +13,12 @@ public class QuizManager {
 
     private static HashMap<String, Quiz> quizzes = new HashMap<>();
 
+    public QuizManager() {
+        // Let's register a dummy quiz for now
+        registerQuiz("math", getWebQuiz("https://pastebin.com/raw/dhLGhypw"));
+        // TODO: remove me
+    }
+
     public static void registerQuiz(String name, Quiz quiz) {
         quizzes.put(name, quiz);
     }
@@ -27,7 +33,7 @@ public class QuizManager {
 
     public static Quiz getWebQuiz(String url) {
         try {
-            return new Gson().fromJson(Jsoup.connect("https://pastebin.com/raw/dhLGhypw").get().body().text(), Quiz.class);
+            return new Gson().fromJson(Jsoup.connect(url).get().body().text(), Quiz.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
