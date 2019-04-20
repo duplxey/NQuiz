@@ -37,5 +37,27 @@ public class QuizCommand extends Command {
             quiz.print();
             return;
         }
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("register")) {
+                if (QuizManager.existsQuiz(args[1])) {
+                    System.out.println("Quiz named '" + args[1] + "' already exists.");
+                    return;
+                }
+                QuizManager.registerQuiz(args[1], new Quiz(args[1]));
+                System.out.println("Quiz named '" + args[1] + "' has been registered.");
+                return;
+            }
+            if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("unregister")) {
+                if (!QuizManager.existsQuiz(args[1])) {
+                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+                    return;
+                }
+                QuizManager.unregisterQuiz(args[1]);
+                System.out.println("Quiz named '" + args[1] + "' has been removed.");
+                return;
+            }
+            System.out.println(Message.WRONG_SYNTAX.getText() + getSyntax());
+            return;
+        }
     }
 }

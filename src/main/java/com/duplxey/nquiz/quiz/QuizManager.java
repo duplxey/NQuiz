@@ -2,10 +2,8 @@ package com.duplxey.nquiz.quiz;
 
 import com.google.gson.Gson;
 import org.jsoup.Jsoup;
-import sun.security.jgss.GSSCaller;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -38,6 +36,10 @@ public class QuizManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean existsQuiz(String name) {
+        return quizzes.containsKey(name);
     }
 
     public static Collection<Quiz> getQuizzes() {
