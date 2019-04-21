@@ -71,7 +71,7 @@ public class Quiz {
     }
 
     public String info() {
-        return name + "(" + description + ") " + "(" + category + ") " + "(" + difficulty + ")";
+        return name + " (" + description + ") " + "(" + category + ") " + "(" + difficulty + ")";
     }
 
     public void print() {

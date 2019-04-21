@@ -1,6 +1,7 @@
 package com.duplxey.nquiz.commander.command.commands;
 
 import com.duplxey.nquiz.commander.command.Command;
+import com.duplxey.nquiz.constants.Message;
 
 public class ExitCommand extends Command {
 
@@ -10,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(String[] args) {
-        System.out.println("Terminating the program.");
+        System.out.println(Message.PROGRAM_EXIT.getText());
         System.exit(0);
     }
 }

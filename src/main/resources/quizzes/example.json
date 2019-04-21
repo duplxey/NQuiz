@@ -1,0 +1,26 @@
+{
+  "name": "example",
+  "description": "Addition, substraction...",
+  "category": "MATH",
+  "difficulty": "HARD",
+  "questions": [
+    {
+      "text": "1+1=?",
+      "answers": [
+        {
+          "text": "2"
+        },
+        {
+          "text": "3"
+        },
+        {
+          "text": "1"
+        },
+        {
+          "text": "0"
+        }
+      ],
+      "correct": 0
+    }
+  ]
+}

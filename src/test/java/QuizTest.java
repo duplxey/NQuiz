@@ -1,8 +1,10 @@
 import com.duplxey.nquiz.quiz.*;
+import com.duplxey.nquiz.util.GsonUtil;
 import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -36,8 +38,7 @@ class QuizTest {
         QuizManager.registerQuiz("about-me", quiz);
         quiz.print();
 
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(quiz));
+        System.out.println(GsonUtil.getInstance().getGson().toJson(quiz));
     }
 
     @Test
@@ -58,6 +59,13 @@ class QuizTest {
             webQuiz.print();
         } else {
             System.out.println("WebQuiz was null.");
+        }
+    }
+
+    @Test
+    void loadLocalQuizzes() {
+        for (File file : new File(QuizTest.class.getClassLoader().getResource("quizzes").getFile()).listFiles()) {
+            System.out.println(file.getName());
         }
     }
 }

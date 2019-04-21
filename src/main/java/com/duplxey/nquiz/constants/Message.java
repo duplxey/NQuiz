@@ -7,6 +7,7 @@ public enum Message {
     UNKNOWN_COMMAND("Unknown command! Use 'help' for help."),
     NO_COMMAND("Cannot find the specified command."),
     WRONG_SYNTAX("Wrong syntax! "),
+    PROGRAM_EXIT("Terminating the program."),
     ;
 
     private String text;
