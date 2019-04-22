@@ -1,4 +1,4 @@
-package com.duplxey.nquiz.commander.command.commands;
+package com.duplxey.nquiz.commander.command.commands.general;
 
 import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.commander.command.CommandManager;
@@ -11,9 +11,9 @@ public class CommandsCommand extends Command {
 
     @Override
     public void execute(String[] args) {
-        System.out.println("List of registered commands:");
+        System.out.println("List of all registered commands:");
         for (Command command : CommandManager.getCommands()) {
-            System.out.println(command.getCommand() + " | " + command.getDescription() + " | " + command.getSyntax());
+            System.out.println(command.info());
         }
     }
 }

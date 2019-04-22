@@ -1,7 +1,11 @@
 package com.duplxey.nquiz.quiz.data;
 
+import com.duplxey.nquiz.quiz.Quiz;
+import com.duplxey.nquiz.quiz.QuizManager;
+import com.duplxey.nquiz.util.FileUtil;
+import com.duplxey.nquiz.util.GsonUtil;
+
 import java.io.File;
-import java.io.IOException;
 
 public class DataManager {
 
@@ -15,18 +19,14 @@ public class DataManager {
     private void setup() {
         quizDirectory = new File("quizzes");
         if (!quizDirectory.exists()) {
-            try {
-                quizDirectory.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            quizDirectory.mkdir();
         }
     }
 
     private void loadLocalQuizzes() {
-//        for (File file : quizDirectory.listFiles()) {
-//            QuizManager.registerQuiz(file.getName(), GsonUtil.getInstance().getGson().fromJson(FileUtil.getFileContent(file), Quiz.class));
-//        }
+        for (File file : quizDirectory.listFiles()) {
+            QuizManager.registerQuiz(file.getName(), GsonUtil.getInstance().getGson().fromJson(FileUtil.getFileContent(file.getPath()), Quiz.class));
+        }
     }
 
     public File getQuizDirectory() {

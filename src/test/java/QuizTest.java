@@ -1,6 +1,5 @@
 import com.duplxey.nquiz.quiz.*;
 import com.duplxey.nquiz.util.GsonUtil;
-import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ class QuizTest {
     void dummyExam() {
         Quiz quiz = new Quiz(
                 "about-me",
-                "Some basic questions about me.",
+                "Some general questions about me.",
                 QuizCategory.FUN,
                 QuizDifficulty.MEDIUM,
                 new LinkedList<>(Arrays.asList(

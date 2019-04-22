@@ -1,16 +1,19 @@
 package com.duplxey.nquiz.commander.command;
 
-import com.duplxey.nquiz.commander.command.commands.CommandsCommand;
-import com.duplxey.nquiz.commander.command.commands.ExitCommand;
-import com.duplxey.nquiz.commander.command.commands.InfoCommand;
 import com.duplxey.nquiz.commander.command.commands.QuizCommand;
+import com.duplxey.nquiz.commander.command.commands.general.AboutCommand;
+import com.duplxey.nquiz.commander.command.commands.general.CommandsCommand;
+import com.duplxey.nquiz.commander.command.commands.general.ExitCommand;
+import com.duplxey.nquiz.commander.command.commands.general.InfoCommand;
 
 public class CommandRegister {
 
     public CommandRegister() {
-        new ExitCommand();
+        new AboutCommand();
         new CommandsCommand();
+        new ExitCommand();
         new InfoCommand();
+
         new QuizCommand();
     }
 }

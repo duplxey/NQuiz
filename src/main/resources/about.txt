@@ -7,4 +7,9 @@
       Simple command-line based quiz.
 
 Welcome!
+
 If you need any help with the commands use 'help'
+To view the quiz list use 'quiz list'
+To play a quiz use 'quiz <name>'
+
+This program is open-sourced at: https://github.com/duplxey/NQuiz

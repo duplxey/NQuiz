@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class Commander {
 
+    private boolean running = true;
+
     public Commander() {
         // Registers all the commands.
         new CommandRegister();
@@ -17,7 +19,7 @@ public class Commander {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while (running) {
             String input = scanner.nextLine();
 
             if (input != null) {
@@ -41,5 +43,9 @@ public class Commander {
                 }
             }
         }
+    }
+
+    public void stop() {
+        running = false;
     }
 }

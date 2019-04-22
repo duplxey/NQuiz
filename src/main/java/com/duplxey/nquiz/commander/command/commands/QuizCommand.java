@@ -8,7 +8,7 @@ import com.duplxey.nquiz.quiz.QuizManager;
 public class QuizCommand extends Command {
 
     public QuizCommand() {
-        super("quiz", "Quiz management command.", "/quiz <name|list|create|remove|play> | <name>");
+        super("quiz", "Quiz management command.", "quiz <name|list|create|remove|play> | <name>");
     }
 
     @Override

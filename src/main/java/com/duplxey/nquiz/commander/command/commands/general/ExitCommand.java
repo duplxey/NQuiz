@@ -1,4 +1,4 @@
-package com.duplxey.nquiz.commander.command.commands;
+package com.duplxey.nquiz.commander.command.commands.general;
 
 import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.constants.Message;

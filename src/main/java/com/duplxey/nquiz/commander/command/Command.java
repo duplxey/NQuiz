@@ -18,7 +18,7 @@ public abstract class Command {
     public Command(String command, String description, String[] aliases, String syntax) {
         this.command = command;
         this.description = description;
-        this.syntax = syntax;
+        this.syntax = syntax.replaceAll("<command>", command);
         this.aliases = aliases;
 
         CommandManager.registerCommand(this);
@@ -94,16 +94,15 @@ public abstract class Command {
      * @return  Syntax
      */
     public String getSyntax() {
-        return syntax.replace("<command>", command);
+        return syntax;
     }
 
     /**
-     * Displays command's info.
+     * Gets command's information.
+     *
+     * @return  Command information
      */
-    public void info() {
-        System.out.println("Command info");
-        System.out.println("cmd: " + command);
-        System.out.println("des: " + description);
-        System.out.println("syn: " + getSyntax());
+    public String info() {
+        return command + " | " + description + " | " + syntax;
     }
 }
