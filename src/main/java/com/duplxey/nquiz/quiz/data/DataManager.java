@@ -9,11 +9,11 @@ import java.io.File;
 
 public class DataManager {
 
-    private File quizDirectory;
+    private static File quizDirectory;
 
     public DataManager() {
         setup();
-        loadLocalQuizzes();
+        loadSavedQuizzes();
     }
 
     private void setup() {
@@ -23,10 +23,19 @@ public class DataManager {
         }
     }
 
-    private void loadLocalQuizzes() {
+    private void loadSavedQuizzes() {
         for (File file : quizDirectory.listFiles()) {
-            QuizManager.registerQuiz(file.getName(), GsonUtil.getInstance().getGson().fromJson(FileUtil.getFileContent(file.getPath()), Quiz.class));
+            QuizManager.registerQuiz(GsonUtil.getInstance().getGson().fromJson(FileUtil.getFileContent(file.getPath()), Quiz.class));
         }
+    }
+
+    public static void save(Quiz quiz) {
+        FileUtil.writeToFile(quizDirectory.getPath() + File.separator + quiz.getName() + ".json", GsonUtil.getInstance().getGson().toJson(quiz));
+    }
+
+    public static void delete(String name) {
+        File quizFile = new File(quizDirectory, name + ".json");
+        quizFile.delete();
     }
 
     public File getQuizDirectory() {

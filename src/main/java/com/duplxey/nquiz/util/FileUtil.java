@@ -20,6 +20,16 @@ public class FileUtil {
         return builder.toString();
     }
 
+    public static void writeToFile(String path, String content) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Reads given resource file as a string.
      *

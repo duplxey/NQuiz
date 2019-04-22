@@ -14,14 +14,14 @@ public class QuizManager {
 
     public QuizManager() {
         // Let's register a dummy quiz for now
-        registerQuiz("math", getWebQuiz("https://pastebin.com/raw/dhLGhypw"));
+        registerQuiz(getWebQuiz("https://pastebin.com/raw/dhLGhypw"));
         // TODO: remove me
 
         DataManager dataManager = new DataManager();
     }
 
-    public static void registerQuiz(String name, Quiz quiz) {
-        quizzes.put(name, quiz);
+    public static void registerQuiz(Quiz quiz) {
+        quizzes.put(quiz.getName(), quiz);
     }
 
     public static void unregisterQuiz(String name) {
