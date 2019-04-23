@@ -1,5 +1,10 @@
 package com.duplxey.nquiz.quiz;
 
+import com.duplxey.nquiz.util.FileUtil;
+import com.duplxey.nquiz.util.GsonUtil;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Quiz {
@@ -9,6 +14,9 @@ public class Quiz {
     private QuizCategory category;
     private QuizDifficulty difficulty;
     private LinkedList<Question> questions;
+
+    // Transient to prevent serialization
+    private transient File file = null;
 
     public Quiz(String name, String description, QuizCategory category, QuizDifficulty difficulty, LinkedList<Question> questions) {
         this.name = name;
@@ -26,12 +34,21 @@ public class Quiz {
         this(name, "No description given.", QuizCategory.FUN, QuizDifficulty.EASY, new LinkedList<Question>() {});
     }
 
-    public void addQuestion(Question question) {
-        questions.add(question);
+    public void save() {
+        if (file == null) {
+            file = new File(QuizManager.getQuizDirectory(), name + ".json");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        FileUtil.writeToFile(file.getPath(), GsonUtil.getInstance().getGson().toJson(this));
     }
 
-    public void removeQuestion(int questionId) {
-        questions.remove(questionId);
+    public void delete() {
+        if (file == null) return;
+        file.delete();
     }
 
     public String getName() {
@@ -66,23 +83,23 @@ public class Quiz {
         this.difficulty = difficulty;
     }
 
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
+
+    public void removeQuestion(int questionId) {
+        questions.remove(questionId);
+    }
+
     public void setQuestions(LinkedList<Question> questions) {
         this.questions = questions;
     }
 
-    public String info() {
-        return name + " (" + description + ") " + "(" + category + ") " + "(" + difficulty + ")";
+    public void clearQuestions() {
+        questions.clear();
     }
 
-    public void print() {
-        System.out.println("============");
-        System.out.println(name);
-        System.out.println(description);
-        System.out.println(category);
-        System.out.println(difficulty);
-        System.out.println("============");
-        for (Question q : questions) {
-            System.out.println(q.getText());
-        }
+    public String info() {
+        return name + " (" + description + ") " + "(" + category + ") " + "(" + difficulty + ")";
     }
 }

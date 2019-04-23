@@ -7,4 +7,5 @@ Simple command-line based quiz.
 - Jsoup 1.8.3
 
 ## A few quiz examples:
-- https://pastebin.com/raw/dhLGhypw
+- https://pastebin.com/raw/dhLGhypw (basic)
+- https://pastebin.com/raw/RBSBg2vK (a bit more complex)

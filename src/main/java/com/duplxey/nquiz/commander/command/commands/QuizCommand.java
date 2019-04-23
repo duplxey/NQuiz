@@ -3,7 +3,6 @@ package com.duplxey.nquiz.commander.command.commands;
 import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.constants.Message;
 import com.duplxey.nquiz.quiz.*;
-import com.duplxey.nquiz.quiz.data.DataManager;
 
 import java.util.Scanner;
 
@@ -36,7 +35,7 @@ public class QuizCommand extends Command {
                 System.out.println("The quiz named '" + args[0] + "' does not exist.");
                 return;
             }
-            quiz.print();
+            System.out.println("Playing quiz!");
             return;
         }
         if (args.length == 2) {
@@ -48,7 +47,6 @@ public class QuizCommand extends Command {
                 Quiz created = new Quiz(args[1]);
                 QuizManager.registerQuiz(created);
                 System.out.println("Quiz named '" + args[1] + "' has been registered.");
-                DataManager.save(created);
                 return;
             }
             if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("unregister")) {
@@ -58,7 +56,37 @@ public class QuizCommand extends Command {
                 }
                 QuizManager.unregisterQuiz(args[1]);
                 System.out.println("Quiz named '" + args[1] + "' has been removed.");
-                DataManager.delete(args[1]);
+                return;
+            }
+            if (args[0].equalsIgnoreCase("load")) {
+                String link = args[1];
+                Quiz webQuiz = QuizManager.getWebQuiz(link);
+                if (QuizManager.existsQuiz(webQuiz.getName())) {
+                    System.out.println("Quiz named '" + args[1] + "' already exists.");
+                    return;
+                }
+                QuizManager.registerQuiz(webQuiz);
+                System.out.println("Web quiz named '" + webQuiz.getName() + "' has been registered.");
+                return;
+            }
+            if (args[0].equalsIgnoreCase("save")) {
+                if (!QuizManager.existsQuiz(args[1])) {
+                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+                    return;
+                }
+                Quiz quiz = QuizManager.getQuiz(args[1]);
+                quiz.save();
+                System.out.println("Quiz named '" + args[1] + "' has been successfully saved.");
+                return;
+            }
+            if (args[0].equalsIgnoreCase("delete")) {
+                if (!QuizManager.existsQuiz(args[1])) {
+                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+                    return;
+                }
+                Quiz quiz = QuizManager.getQuiz(args[1]);
+                quiz.delete();
+                System.out.println("Quiz named '" + args[1] + "' has been successfully deleted.");
                 return;
             }
             if (args[0].equalsIgnoreCase("addquestion")) {
@@ -79,7 +107,7 @@ public class QuizCommand extends Command {
                 int correct = scanner.nextInt();
                 quiz.addQuestion(new Question(question, answers, correct-1));
                 System.out.println("Successfully added a question.");
-                DataManager.save(quiz);
+//                DataManager.save(quiz);
                 return;
             }
             System.out.println(Message.WRONG_SYNTAX.getText() + getSyntax());
@@ -95,7 +123,7 @@ public class QuizCommand extends Command {
                 String difficulty = args[2];
                 // TODO: verify if enum exists
                 quiz.setDifficulty(QuizDifficulty.valueOf(difficulty.toUpperCase()));
-                DataManager.save(quiz);
+//                DataManager.save(quiz);
                 return;
             }
             if (args[0].equalsIgnoreCase("setcategory")) {
@@ -107,7 +135,7 @@ public class QuizCommand extends Command {
                 String category = args[2];
                 // TODO: verify if enum exists
                 quiz.setCategory(QuizCategory.valueOf(category.toUpperCase()));
-                DataManager.save(quiz);
+//                DataManager.save(quiz);
                 return;
             }
             if (args[0].equalsIgnoreCase("removequestion")) {
@@ -117,7 +145,7 @@ public class QuizCommand extends Command {
                 }
                 Quiz quiz = QuizManager.getQuiz(args[1]);
                 quiz.removeQuestion(new Scanner(System.in).nextInt()-1);
-                DataManager.save(quiz);
+//                DataManager.save(quiz);
                 return;
             }
         }
