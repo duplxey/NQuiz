@@ -2,6 +2,7 @@ package com.duplxey.nquiz.quiz;
 
 import com.duplxey.nquiz.util.FileUtil;
 import com.duplxey.nquiz.util.GsonUtil;
+import com.google.gson.JsonSyntaxException;
 import org.jsoup.Jsoup;
 
 import java.io.File;
@@ -42,13 +43,8 @@ public class QuizManager {
         return quizzes.get(name);
     }
 
-    public static Quiz getWebQuiz(String url) {
-        try {
-            return GsonUtil.getInstance().getGson().fromJson(Jsoup.connect(url).get().body().text(), Quiz.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static Quiz getWebQuiz(String url) throws IOException {
+        return GsonUtil.getInstance().getGson().fromJson(Jsoup.connect(url).get().body().text(), Quiz.class);
     }
 
     public static boolean existsQuiz(String name) {

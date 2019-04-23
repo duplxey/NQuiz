@@ -4,12 +4,13 @@ import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.constants.Message;
 import com.duplxey.nquiz.quiz.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class QuizCommand extends Command {
 
     public QuizCommand() {
-        super("quiz", "Quiz management command.", "quiz <name|list|create|remove|play> | <name>");
+        super("quiz", "Quiz management command.", "quiz <name|list|register|unregister|load|save|delete> | <name>");
     }
 
     @Override
@@ -30,65 +31,79 @@ public class QuizCommand extends Command {
                 }
                 return;
             }
-            Quiz quiz = QuizManager.getQuiz(args[0]);
+            String quizName = args[0];
+            Quiz quiz = QuizManager.getQuiz(quizName);
             if (quiz == null) {
-                System.out.println("The quiz named '" + args[0] + "' does not exist.");
+                System.out.print("The quiz named '" + quizName + "' does not exist.");
                 return;
             }
-            System.out.println("Playing quiz!");
+            System.out.println("You are now playing '" + quizName + "'!");
+            System.out.println("Description: " + quiz.getDescription());
+            System.out.println("Category: " + quiz.getCategory());
+            System.out.println("Difficulty: " + quiz.getDifficulty());
+            System.out.println("Number of questions: " + quiz.getQuestions().size());
+            // TODO: create a new play object
             return;
         }
         if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("register")) {
-                if (QuizManager.existsQuiz(args[1])) {
-                    System.out.println("Quiz named '" + args[1] + "' already exists.");
+            String quizName = args[0];
+            if (args[0].equalsIgnoreCase("register") || args[0].equalsIgnoreCase("create")) {
+                if (QuizManager.existsQuiz(quizName)) {
+                    System.out.println("Quiz named '" + quizName + "' already exists.");
                     return;
                 }
-                Quiz created = new Quiz(args[1]);
+                Quiz created = new Quiz(quizName);
                 QuizManager.registerQuiz(created);
-                System.out.println("Quiz named '" + args[1] + "' has been registered.");
+                System.out.println("Quiz named '" + quizName + "' has been registered.");
                 return;
             }
-            if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("unregister")) {
-                if (!QuizManager.existsQuiz(args[1])) {
-                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+            if (args[0].equalsIgnoreCase("unregister") || args[0].equalsIgnoreCase("remove")) {
+                if (!QuizManager.existsQuiz(quizName)) {
+                    System.out.println("Quiz named '" + quizName + "' doesn't exist.");
                     return;
                 }
-                QuizManager.unregisterQuiz(args[1]);
-                System.out.println("Quiz named '" + args[1] + "' has been removed.");
+                QuizManager.unregisterQuiz(quizName);
+                System.out.println("Quiz named '" + quizName + "' has been removed.");
                 return;
             }
             if (args[0].equalsIgnoreCase("load")) {
                 String link = args[1];
-                Quiz webQuiz = QuizManager.getWebQuiz(link);
-                if (QuizManager.existsQuiz(webQuiz.getName())) {
-                    System.out.println("Quiz named '" + args[1] + "' already exists.");
+                try {
+                    Quiz webQuiz = QuizManager.getWebQuiz(link);
+                    if (QuizManager.existsQuiz(webQuiz.getName())) {
+                        System.out.println("Quiz named '" + args[1] + "' already exists.");
+                        return;
+                    }
+                    QuizManager.registerQuiz(webQuiz);
+                    System.out.println("Web quiz named '" + webQuiz.getName() + "' has been registered.");
                     return;
+                } catch (IOException e) {
+                    System.out.println("Failed to parse JSON from that link! Are you sure the quiz is valid?");
+                    e.printStackTrace();
                 }
-                QuizManager.registerQuiz(webQuiz);
-                System.out.println("Web quiz named '" + webQuiz.getName() + "' has been registered.");
                 return;
             }
             if (args[0].equalsIgnoreCase("save")) {
-                if (!QuizManager.existsQuiz(args[1])) {
-                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+                if (!QuizManager.existsQuiz(quizName)) {
+                    System.out.println("Quiz named '" + quizName + "' doesn't exist.");
                     return;
                 }
-                Quiz quiz = QuizManager.getQuiz(args[1]);
+                Quiz quiz = QuizManager.getQuiz(quizName);
                 quiz.save();
-                System.out.println("Quiz named '" + args[1] + "' has been successfully saved.");
+                System.out.println("Quiz named '" + quizName + "' has been successfully saved.");
                 return;
             }
             if (args[0].equalsIgnoreCase("delete")) {
-                if (!QuizManager.existsQuiz(args[1])) {
-                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+                if (!QuizManager.existsQuiz(quizName)) {
+                    System.out.println("Quiz named '" + quizName + "' doesn't exist.");
                     return;
                 }
-                Quiz quiz = QuizManager.getQuiz(args[1]);
+                Quiz quiz = QuizManager.getQuiz(quizName);
                 quiz.delete();
-                System.out.println("Quiz named '" + args[1] + "' has been successfully deleted.");
+                System.out.println("Quiz named '" + quizName + "' has been successfully deleted.");
                 return;
             }
+            // TODO: this doesn't work like it's supposed to!
             if (args[0].equalsIgnoreCase("addquestion")) {
                 if (!QuizManager.existsQuiz(args[1])) {
                     System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
@@ -99,7 +114,7 @@ public class QuizCommand extends Command {
                 System.out.println("Question?");
                 String question = scanner.nextLine();
                 System.out.println("How many answers?");
-                Answer[] answers = new Answer[scanner.nextInt() + 1];
+                Answer[] answers = new Answer[scanner.nextInt()];
                 for (int i = 0; i < answers.length; i++) {
                     answers[i] = new Answer(scanner.nextLine());
                 }
@@ -107,7 +122,6 @@ public class QuizCommand extends Command {
                 int correct = scanner.nextInt();
                 quiz.addQuestion(new Question(question, answers, correct-1));
                 System.out.println("Successfully added a question.");
-//                DataManager.save(quiz);
                 return;
             }
             System.out.println(Message.WRONG_SYNTAX.getText() + getSyntax());
@@ -123,7 +137,6 @@ public class QuizCommand extends Command {
                 String difficulty = args[2];
                 // TODO: verify if enum exists
                 quiz.setDifficulty(QuizDifficulty.valueOf(difficulty.toUpperCase()));
-//                DataManager.save(quiz);
                 return;
             }
             if (args[0].equalsIgnoreCase("setcategory")) {
@@ -135,7 +148,6 @@ public class QuizCommand extends Command {
                 String category = args[2];
                 // TODO: verify if enum exists
                 quiz.setCategory(QuizCategory.valueOf(category.toUpperCase()));
-//                DataManager.save(quiz);
                 return;
             }
             if (args[0].equalsIgnoreCase("removequestion")) {
@@ -145,7 +157,6 @@ public class QuizCommand extends Command {
                 }
                 Quiz quiz = QuizManager.getQuiz(args[1]);
                 quiz.removeQuestion(new Scanner(System.in).nextInt()-1);
-//                DataManager.save(quiz);
                 return;
             }
         }
