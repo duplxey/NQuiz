@@ -6,9 +6,8 @@ import com.duplxey.nquiz.util.FileUtil;
 
 public class Main {
 
-    // TODO: fix that stupid static abuse
     public static void main(String[] args) {
-        System.out.println(FileUtil.getResourceContent("about.txt"));
+        System.out.println(FileUtil.getFileContent("resources/about.txt"));
 
         QuizManager quizManager = new QuizManager();
 
