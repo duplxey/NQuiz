@@ -1,6 +1,7 @@
 package com.duplxey.nquiz.util;
 
 import java.io.*;
+import java.util.stream.Collectors;
 
 public class FileUtil {
 
@@ -39,5 +40,20 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Reads given resource file as a string.
+     *
+     * @param fileName the path to the resource file
+     * @return the file's contents or null if the file could not be opened
+     */
+    public static String getResourceContent(String fileName) {
+        InputStream is = FileUtil.class.getClassLoader().getResourceAsStream(fileName);
+        if (is != null) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
+        return null;
     }
 }

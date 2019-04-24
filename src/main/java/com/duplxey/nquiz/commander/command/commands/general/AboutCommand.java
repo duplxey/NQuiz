@@ -11,6 +11,6 @@ public class AboutCommand extends Command {
 
     @Override
     public void execute(String[] args) {
-        System.out.println(FileUtil.getFileContent("resources/about.txt"));
+        System.out.println(FileUtil.getFileContent("about.txt"));
     }
 }

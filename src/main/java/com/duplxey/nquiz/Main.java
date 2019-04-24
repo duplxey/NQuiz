@@ -7,7 +7,7 @@ import com.duplxey.nquiz.util.FileUtil;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(FileUtil.getFileContent("resources/about.txt"));
+        System.out.println(FileUtil.getResourceContent("about.txt"));
 
         QuizManager quizManager = new QuizManager();
 

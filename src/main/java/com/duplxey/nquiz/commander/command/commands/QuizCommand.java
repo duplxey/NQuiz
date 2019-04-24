@@ -162,6 +162,22 @@ public class QuizCommand extends Command {
                 return;
             }
         }
+        if (args.length >= 3) {
+            if (args[0].equalsIgnoreCase("setdescription")) {
+                if (!QuizManager.existsQuiz(args[1])) {
+                    System.out.println("Quiz named '" + args[1] + "' doesn't exist.");
+                    return;
+                }
+                Quiz quiz = QuizManager.getQuiz(args[1]);
+                StringBuilder builder = new StringBuilder();
+                for (int i = 2; i < args.length; i++) {
+                    builder.append(args[i]).append(" ");
+                }
+                quiz.setDescription(builder.toString().substring(0, builder.toString().length()-1));
+                System.out.println("Quiz named '" + args[1] + "' now has the following description: " + builder.toString());
+                return;
+            }
+        }
         System.out.println(Message.WRONG_SYNTAX.getText() + getSyntax());
     }
 }
