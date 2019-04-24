@@ -2,7 +2,6 @@ package com.duplxey.nquiz.quiz;
 
 import com.duplxey.nquiz.util.FileUtil;
 import com.duplxey.nquiz.util.GsonUtil;
-import com.google.gson.JsonSyntaxException;
 import org.jsoup.Jsoup;
 
 import java.io.File;

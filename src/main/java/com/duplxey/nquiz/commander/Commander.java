@@ -28,7 +28,7 @@ public class Commander {
                 String cmd;
                 String[] arguments = {};
                 if (input.contains(" ")) {
-                    // contains arguments
+                    // isValid arguments
                     arguments = input.split(" ");
                     cmd = arguments[0];
                     arguments = Arrays.copyOfRange(arguments, 1, arguments.length);

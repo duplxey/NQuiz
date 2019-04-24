@@ -100,7 +100,12 @@ class QuizTest {
 
     @Test
     void webQuizParse() {
-        Quiz webQuiz = QuizManager.getWebQuiz("https://pastebin.com/raw/dhLGhypw");
+        Quiz webQuiz = null;
+        try {
+            webQuiz = QuizManager.getWebQuiz("https://pastebin.com/raw/dhLGhypw");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (webQuiz != null) {
             System.out.println(webQuiz.info());
         } else {

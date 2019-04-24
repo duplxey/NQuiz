@@ -34,7 +34,7 @@ public class Quiz {
         this(name, "No description given.", QuizCategory.FUN, QuizDifficulty.EASY, new LinkedList<Question>() {});
     }
 
-    public void save() {
+    private void fileSetup() {
         if (file == null) {
             file = new File(QuizManager.getQuizDirectory(), name + ".json");
             try {
@@ -43,11 +43,15 @@ public class Quiz {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void save() {
+        fileSetup();
         FileUtil.writeToFile(file.getPath(), GsonUtil.getInstance().getGson().toJson(this));
     }
 
     public void delete() {
-        if (file == null) return;
+        fileSetup();
         file.delete();
     }
 
