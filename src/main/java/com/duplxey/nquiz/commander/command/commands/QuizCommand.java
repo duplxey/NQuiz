@@ -38,12 +38,7 @@ public class QuizCommand extends Command {
                 System.out.print("The quiz named '" + quizName + "' does not exist.");
                 return;
             }
-            System.out.println("You are now playing '" + quizName + "'!");
-            System.out.println("Description: " + quiz.getDescription());
-            System.out.println("Category: " + quiz.getCategory());
-            System.out.println("Difficulty: " + quiz.getDifficulty());
-            System.out.println("Number of questions: " + quiz.getQuestions().size());
-            // TODO: create a new play object
+            new QuizPlay(quiz).play();
             return;
         }
         if (args.length == 2) {
