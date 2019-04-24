@@ -1,5 +1,13 @@
 # NQuiz
-Simple command-line based quiz.
+Simple command-line based quiz generator & player.
+
+## Installation
+The only thing needed for this program to work is Java. If you don't have it installed already download it at: <https://www.java.com/en/download/> 
+
+## Usage
+1. Open up the Terminal/Console/CommandPrompt
+1. Navigate to the nquiz.jar (cd)
+1. Run the following command: `java -jar nquiz.jar`
 
 ## Dependencies
 - JUnit 5.4.2
