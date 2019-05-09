@@ -8,6 +8,9 @@
 
 Welcome!
 
+If this is your first time using the program, I'd suggest
+you to read the wiki on github: https://github.com/duplxey/NQuiz/wiki
+
 If you need any help with the commands use 'help'
 To view the quiz list use 'quiz list'
 To play a quiz use 'quiz <name>'

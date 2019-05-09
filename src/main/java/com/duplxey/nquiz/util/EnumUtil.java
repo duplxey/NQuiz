@@ -5,7 +5,7 @@ import java.util.EnumSet;
 public class EnumUtil {
 
     /**
-     * Checks if the given value exists in the enumeration.
+     * Checks if the given value exists in the enumeration class.
      *
      * @param _enumClass  Enum class
      * @param value  Value

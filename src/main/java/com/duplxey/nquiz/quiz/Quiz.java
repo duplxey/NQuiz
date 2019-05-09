@@ -16,27 +16,30 @@ public class Quiz {
     private LinkedList<Question> questions;
 
     // Transient to prevent serialization
+    private transient File quizDirectory;
     private transient File file = null;
 
-    public Quiz(String name, String description, QuizCategory category, QuizDifficulty difficulty, LinkedList<Question> questions) {
+    public Quiz(QuizManager quizManager, String name, String description, QuizCategory category, QuizDifficulty difficulty, LinkedList<Question> questions) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.difficulty = difficulty;
         this.questions = questions;
+
+        quizDirectory = quizManager.getQuizDirectory();
     }
 
-    public Quiz(String name, String description, QuizCategory category, QuizDifficulty difficulty) {
-        this(name, description, category, difficulty, new LinkedList<Question>() {});
+    public Quiz(QuizManager quizManager, String name, String description, QuizCategory category, QuizDifficulty difficulty) {
+        this(quizManager, name, description, category, difficulty, new LinkedList<Question>() {});
     }
 
-    public Quiz(String name) {
-        this(name, "No description given.", QuizCategory.FUN, QuizDifficulty.EASY, new LinkedList<Question>() {});
+    public Quiz(QuizManager quizManager, String name) {
+        this(quizManager, name, "No description given.", QuizCategory.FUN, QuizDifficulty.EASY, new LinkedList<Question>() {});
     }
 
     private void fileSetup() {
         if (file == null) {
-            file = new File(QuizManager.getQuizDirectory(), name + ".json");
+            file = new File(quizDirectory, name + ".json");
             try {
                 file.createNewFile();
             } catch (IOException e) {

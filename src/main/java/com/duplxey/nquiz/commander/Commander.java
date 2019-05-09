@@ -4,6 +4,8 @@ import com.duplxey.nquiz.commander.command.Command;
 import com.duplxey.nquiz.commander.command.CommandManager;
 import com.duplxey.nquiz.commander.command.CommandRegister;
 import com.duplxey.nquiz.constants.Message;
+import com.duplxey.nquiz.quiz.QuizManager;
+import com.duplxey.nquiz.util.FileUtil;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,9 +14,11 @@ public class Commander {
 
     private boolean running = true;
 
-    public Commander() {
+    public Commander(QuizManager quizManager) {
+        System.out.println(FileUtil.getResourceContent("about.txt"));
+
         // Registers all the commands.
-        new CommandRegister();
+        new CommandRegister(quizManager);
     }
 
     public void start() {

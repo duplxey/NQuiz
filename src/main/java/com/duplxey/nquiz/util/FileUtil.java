@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class FileUtil {
 
     /**
-     * Gets file's content as a string.
+     * Gets the file's content as a string.
      *
      * @param path  File's path
      * @return  Content
@@ -27,7 +27,7 @@ public class FileUtil {
     }
 
     /**
-     * Replaces file's content with the given string.
+     * Replaces the file's content with the given string.
      *
      * @param path  File's path
      * @param content  Content
@@ -43,7 +43,7 @@ public class FileUtil {
     }
 
     /**
-     * Reads given resource file as a string.
+     * Reads the given resource file as a string.
      *
      * @param fileName the path to the resource file
      * @return the file's contents or null if the file could not be opened

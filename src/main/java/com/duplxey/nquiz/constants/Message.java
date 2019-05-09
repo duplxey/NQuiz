@@ -8,7 +8,6 @@ public enum Message {
     NO_COMMAND("Cannot find the specified command."),
     WRONG_SYNTAX("Wrong syntax! "),
     PROGRAM_EXIT("Terminating the program."),
-    ARGUMENT_NULL("Specified argument is null!"),
     ;
 
     private String text;

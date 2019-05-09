@@ -9,9 +9,12 @@ import java.util.LinkedList;
 
 class QuizTest {
 
+    private QuizManager quizManager = new QuizManager();
+
     @Test
     void dummyQuiz() {
         Quiz quiz = new Quiz(
+                quizManager,
                 "about-me",
                 "Some general questions about me.",
                 QuizCategory.FUN,
@@ -33,7 +36,7 @@ class QuizTest {
                                 }, 3)
                 ))
         );
-        QuizManager.registerQuiz(quiz);
+        quizManager.registerQuiz(quiz);
         System.out.println(quiz.info());
         System.out.println(GsonUtil.getInstance().getGson().toJson(quiz));
     }
@@ -41,6 +44,7 @@ class QuizTest {
     @Test
     void complexQuiz() {
         Quiz quiz = new Quiz(
+                quizManager,
                 "random",
                 "Some random questions.",
                 QuizCategory.TRIVIA,
@@ -82,7 +86,7 @@ class QuizTest {
                                 }, 1)
                 ))
         );
-        QuizManager.registerQuiz(quiz);
+        quizManager.registerQuiz(quiz);
         System.out.println(quiz.info());
         System.out.println(GsonUtil.getInstance().getGson().toJson(quiz));
     }
@@ -102,7 +106,7 @@ class QuizTest {
     void webQuizParse() {
         Quiz webQuiz = null;
         try {
-            webQuiz = QuizManager.getWebQuiz("https://pastebin.com/raw/dhLGhypw");
+            webQuiz = quizManager.getWebQuiz("https://pastebin.com/raw/dhLGhypw");
         } catch (IOException e) {
             e.printStackTrace();
         }

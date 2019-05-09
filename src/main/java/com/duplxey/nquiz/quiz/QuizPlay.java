@@ -31,15 +31,20 @@ public class QuizPlay {
             for (int i = 0; i < question.getAnswers().length; i++) {
                 System.out.println(i + ") " + question.getAnswers()[i].getText());
             }
-            int answer = sc.nextInt();
-            if (question.isCorrect(answer)) {
-                System.out.println("Correct!");
-                results[0]++;
-            } else {
-                System.out.println("Wrong!");
-                results[1]++;
+            try {
+                int answer = sc.nextInt();
+                if (question.isCorrect(answer)) {
+                    System.out.println("Correct!");
+                    results[0]++;
+                } else {
+                    System.out.println("Wrong!");
+                    results[1]++;
+                }
+                current++;
+            } catch (Exception e) {
+                System.out.println("Wrong input. Cancelled.");
+                break;
             }
-            current++;
         }
         double correctPercentage = (100*results[0])/quiz.getQuestions().size();
         double wrongPercentage = 100 - correctPercentage;
